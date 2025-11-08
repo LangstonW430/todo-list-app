@@ -1,3 +1,5 @@
+from task import Task
+import json
 
 class TaskManager:
     def __init__(self):
@@ -27,3 +29,18 @@ class TaskManager:
             if (reverse and self.tasks[i].title.lower() < self.tasks[i + 1].title.lower()) or (not reverse and self.tasks[i].title.lower() > self.tasks[i + 1].title.lower()):
                 return False
         return True
+    
+    def save_to_file(self, filename="tasks.json"):
+        with open(filename, "w") as file:
+            json.dump([task.to_dict() for task in self.tasks], file, indent=4)
+
+    def load_from_file(self, filename="tasks.json"):
+        try:
+            with open(filename, "r") as file:
+                data = json.load(file)
+                self.tasks = [Task.from_dict(item) for item in data]
+        except FileNotFoundError:
+            self.tasks = []
+        except json.JSONDecodeError:
+            print("Warning: tasks.json is corrupted or empty. Starting with an empty list.")
+            self.tasks = []

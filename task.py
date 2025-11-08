@@ -11,5 +11,6 @@ class Task:
             "status": self.status
         }
     
+    @staticmethod
     def from_dict(data):
         return Task(data["title"], data["due_date"], data["status"])

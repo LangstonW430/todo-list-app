@@ -9,6 +9,10 @@ def run_gui():
     done_list = TaskManager()
     showing_done = False
 
+    # Load saved data
+    task_list.load_from_file()
+    done_list.load_from_file("done_tasks.json")
+
     def button_add_task():
         """Add a new task to the list"""
         title = title_input_entry.get().strip()
@@ -154,6 +158,11 @@ def run_gui():
         current_list.sort_list(not current_list.is_sorted(False))
         refresh()
 
+    def on_close():
+        task_list.save_to_file()
+        done_list.save_to_file("done_tasks.json")
+        window.destroy()
+
     # Main window setup
     window = tk.Tk()
     window.title("To-Do List Manager")
@@ -287,4 +296,5 @@ def run_gui():
     refresh()
     title_input_entry.focus()
 
+    window.protocol("WM_DELETE_WINDOW", on_close)
     window.mainloop()
