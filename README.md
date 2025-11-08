@@ -42,12 +42,11 @@ todo-list/
 ## ⚙️ Installation & Setup
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/yourusername/todo-list.git
    cd todo-list
    ```
-
-````
 
 2. **Run the application:**
 
@@ -61,10 +60,10 @@ todo-list/
 
 ## 💡 Usage
 
-* **Add a task:** Type the task name and click “Add”.
-* **Mark as done:** Click on a task to toggle its completion status.
-* **Delete a task:** Select it and click “Delete”.
-* **Exit safely:** Closing the window automatically saves your current list to `tasks.json`.
+- **Add a task:** Type the task name and click “Add”.
+- **Mark as done:** Click on a task to toggle its completion status.
+- **Delete a task:** Select it and click “Delete”.
+- **Exit safely:** Closing the window automatically saves your current list to `tasks.json`.
 
 When you reopen the program, your tasks will automatically be restored.
 
@@ -91,10 +90,10 @@ When you reopen the program, your tasks will automatically be restored.
 
 ## 🧩 Possible Future Improvements
 
-* Add sorting or filtering by due date or status
-* Implement categories or priorities
-* Add reminders or notifications
-* Sync with cloud storage or a mobile version
+- Add sorting or filtering by due date or status
+- Implement categories or priorities
+- Add reminders or notifications
+- Sync with cloud storage or a mobile version
 
 ---
 
@@ -102,5 +101,4 @@ When you reopen the program, your tasks will automatically be restored.
 
 **Langston Woods**
 Computer Science student at the University of Rochester
-[Portfolio Website](#)
-````
+[Portfolio Website](https://langstonw430.github.io/langstonw430/)
