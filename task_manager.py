@@ -13,28 +13,14 @@ class TaskManager:
         self.tasks.remove(task)
 
     def task_at(self, index=0):
-        counter = 0
-        for task in self.tasks:
-            if counter == index:
-                return self.tasks
-            else:
-                counter += 1
+        return self.tasks[index] if 0 <= index < len(self.tasks) else None
 
     def list_task(self):
-        index = 1
-        for task in  self.tasks:
+        for task, index in enumerate(self.tasks):
             print(f"{index}. {task.title} - Due: {task.due_date}")
-            index += 1
 
-    def sort_list(self, reverse): #sorts by alpha order, reverse order if true
-        while True:
-            changed = False
-            for i in range(len(self.tasks) - 1):
-                if (reverse and self.tasks[i].title.lower() < self.tasks[i + 1].title.lower()) or (not reverse and self.tasks[i].title.lower() > self.tasks[i + 1].title.lower()):
-                    self.tasks[i], self.tasks[i + 1] = self.tasks[i + 1], self.tasks[i]
-                    changed = True
-            if not changed:
-                break
+    def sort_list(self, reverse=False):
+        self.tasks.sort(key=lambda task: task.title.lower(), reverse=reverse)
 
     def is_sorted(self, reverse=False):
         for i in range(len(self.tasks) - 1): # iterate through the list
