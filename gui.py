@@ -41,15 +41,14 @@ def run_gui():
             elif task.status == "in progress":
                 task.status = "done"
                 status_button.config(bg=COLORS['done'])
-            elif showing_done:
-                task.status = "not started"
-                done_list.remove_task(task)
-                task_list.add_task(task)
+                done_list.add_task(task)
+                task_list.remove_task(task)
                 refresh()
                 return
             else:
-                done_list.add_task(task)
-                task_list.remove_task(task)
+                task.status = "not started"
+                done_list.remove_task(task)
+                task_list.add_task(task)
                 refresh()
                 return
             status_button.config(text=task.status.title())
