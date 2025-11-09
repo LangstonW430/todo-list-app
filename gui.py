@@ -61,9 +61,10 @@ def run_gui():
             refresh()
 
         # Task card frame
-        task_frame = tk.Frame(task_container, bg=COLORS['bg_secondary'], 
-                             highlightbackground=COLORS['border'], 
-                             highlightthickness=1)
+        task_frame = tk.Frame(task_container,
+                              bg=COLORS['bg_secondary'], 
+                              highlightbackground=COLORS['border'], 
+                              highlightthickness=1)
         task_frame.pack(fill="x", pady=5, padx=10)
         
         # Configure grid
@@ -73,11 +74,12 @@ def run_gui():
         task_frame.grid_columnconfigure(3, weight=1)
 
         # Title
-        title_label = tk.Label(task_frame, text=task.title, 
-                              font=("Segoe UI", 11, "bold"),
-                              bg=COLORS['bg_secondary'], 
-                              fg=COLORS['text_primary'],
-                              anchor="w", padx=15, pady=12)
+        title_label = tk.Label(task_frame,
+                               text=task.title, 
+                               font=("Segoe UI", 11, "bold"),
+                               bg=COLORS['bg_secondary'], 
+                               fg=COLORS['text_primary'],
+                               anchor="w", padx=15, pady=12)
         title_label.grid(row=0, column=0, sticky="ew")
 
         # Due date
@@ -97,24 +99,24 @@ def run_gui():
         }.get(task.status, COLORS['not_started'])
         
         status_button = tk.Button(task_frame, text=task.status.title(),
-                                 font=("Segoe UI", 9, "bold"),
-                                 bg=status_bg, 
-                                 fg=COLORS['text_primary'],
-                                 relief="flat",
-                                 cursor="hand2",
-                                 padx=10, pady=8,
-                                 command=cycle_status)
+                                  font=("Segoe UI", 9, "bold"),
+                                  bg=status_bg, 
+                                  fg=COLORS['text_primary'],
+                                  relief="flat",
+                                  cursor="hand2",
+                                  padx=10, pady=8,
+                                  command=cycle_status)
         status_button.grid(row=0, column=2, sticky="ew", padx=5)
 
         # Delete button
         delete_btn = tk.Button(task_frame, text="✕",
-                              font=("Segoe UI", 12, "bold"),
-                              bg=COLORS['bg_secondary'], 
-                              fg=COLORS['danger'],
-                              relief="flat",
-                              cursor="hand2",
-                              padx=10, pady=8,
-                              command=delete_task)
+                               font=("Segoe UI", 12, "bold"),
+                               bg=COLORS['bg_secondary'], 
+                               fg=COLORS['danger'],
+                               relief="flat",
+                               cursor="hand2",
+                               padx=10, pady=8,
+                               command=delete_task)
         delete_btn.grid(row=0, column=3, sticky="ew", padx=(0, 5))
 
     def resize_canvas(event):
@@ -131,11 +133,11 @@ def run_gui():
         
         if len(current_list.tasks) == 0:
             empty_label = tk.Label(task_container, 
-                                  text="No tasks yet!" if not showing_done else "No completed tasks!",
-                                  font=("Segoe UI", 12),
-                                  fg=COLORS['text_secondary'],
-                                  bg=COLORS['bg_primary'],
-                                  pady=50)
+                                   text="No tasks yet!" if not showing_done else "No completed tasks!",
+                                   font=("Segoe UI", 12),
+                                   fg=COLORS['text_secondary'],
+                                   bg=COLORS['bg_primary'],
+                                   pady=50)
             empty_label.pack(fill="both", expand=True)
         else:
             for task in current_list:
@@ -181,38 +183,41 @@ def run_gui():
     header_frame.grid_propagate(False)
 
     title_font = tkFont.Font(family="Segoe UI", size=20, weight="bold")
-    title_label = tk.Label(header_frame, text="📝 My To-Do List", 
-                          font=title_font, bg=COLORS['accent'], 
-                          fg="white", pady=25)
+    title_label = tk.Label(header_frame,
+                           text="📝 My To-Do List", 
+                           font=title_font, bg=COLORS['accent'], 
+                           fg="white", pady=25)
     title_label.pack()
 
     # Control buttons frame
     control_frame = tk.Frame(window, bg=COLORS['bg_primary'])
     control_frame.grid(row=1, column=0, sticky="ew", pady=10, padx=10)
 
-    control_frame.grid_columnconfigure(0, weight=1)
-    control_frame.grid_columnconfigure(1, weight=1)
+    control_frame.grid_columnconfigure(0, weight=1, uniform="buttons")
+    control_frame.grid_columnconfigure(1, weight=1, uniform="buttons")
 
     sort_btn = tk.Button(control_frame,
-                        text="⇅ Sort by Date",
-                        font=("Segoe UI", 10),
-                        bg=COLORS['bg_secondary'], 
-                        fg=COLORS['text_primary'],
-                        relief="flat",
-                        cursor="hand2",
-                        padx=20, pady=10,
-                        command=sort_list_button)
+                         text="⇅ Sort by Date",
+                         font=("Segoe UI", 10),
+                         bg=COLORS['bg_secondary'], 
+                         fg=COLORS['text_primary'],
+                         relief="flat",
+                         cursor="hand2",
+                         padx=20,
+                         pady=10,
+                         command=sort_list_button)
     sort_btn.grid(row=0, column=0, padx=5, sticky="ew")
 
     toggle_btn = tk.Button(control_frame,
-                        text="✓ Completed Tasks",
-                        font=("Segoe UI", 10),
-                        bg=COLORS['bg_secondary'], 
-                        fg=COLORS['text_primary'],
-                        relief="flat",
-                        cursor="hand2",
-                        padx=20, pady=10,
-                        command=toggle_list)
+                           text="✓ Completed Tasks",
+                           font=("Segoe UI", 10),
+                           bg=COLORS['bg_secondary'], 
+                           fg=COLORS['text_primary'],
+                           relief="flat",
+                           cursor="hand2",
+                           padx=20,
+                           pady=10,
+                           command=toggle_list)
     toggle_btn.grid(row=0, column=1, padx=5, sticky="ew")
 
     # Main scrollable frame
@@ -223,8 +228,9 @@ def run_gui():
                                  highlightthickness=0)
     task_list_canvas.pack(side="left", fill="both", expand=True)
 
-    scrollbar = tk.Scrollbar(main_frame, orient="vertical", 
-                           command=task_list_canvas.yview)
+    scrollbar = tk.Scrollbar(main_frame,
+                             orient="vertical", 
+                             command=task_list_canvas.yview)
     scrollbar.pack(side="right", fill="y")
     
     task_list_canvas.configure(yscrollcommand=scrollbar.set)
@@ -237,9 +243,10 @@ def run_gui():
     window.bind("<Configure>", resize_canvas)
 
     # Input frame
-    input_frame = tk.Frame(window, bg=COLORS['bg_secondary'], 
-                          highlightbackground=COLORS['border'],
-                          highlightthickness=1)
+    input_frame = tk.Frame(window,
+                           bg=COLORS['bg_secondary'], 
+                           highlightbackground=COLORS['border'],
+                           highlightthickness=1)
     input_frame.grid(row=3, column=0, sticky="ew", padx=10, pady=(0, 10))
 
     input_frame.grid_columnconfigure(0, weight=2)
@@ -250,7 +257,8 @@ def run_gui():
     title_input_frame = tk.Frame(input_frame, bg=COLORS['bg_secondary'])
     title_input_frame.grid(row=0, column=0, sticky="ew", padx=15, pady=15)
 
-    title_input_label = tk.Label(title_input_frame, text="Task Title",
+    title_input_label = tk.Label(title_input_frame,
+                                 text="Task Title",
                                  font=("Segoe UI", 9),
                                  bg=COLORS['bg_secondary'],
                                  fg=COLORS['text_secondary'])
@@ -266,7 +274,8 @@ def run_gui():
     due_date_input_frame = tk.Frame(input_frame, bg=COLORS['bg_secondary'])
     due_date_input_frame.grid(row=0, column=1, sticky="ew", padx=15, pady=15)
 
-    due_date_input_label = tk.Label(due_date_input_frame, text="Due Date",
+    due_date_input_label = tk.Label(due_date_input_frame,
+                                    text="Due Date",
                                     font=("Segoe UI", 9),
                                     bg=COLORS['bg_secondary'],
                                     fg=COLORS['text_secondary'])
@@ -279,14 +288,15 @@ def run_gui():
     due_date_input_entry.pack(fill="x", ipady=8)
 
     # Add button
-    add_task_button = tk.Button(input_frame, text="+ Add Task",
-                               font=("Segoe UI", 11, "bold"),
-                               bg=COLORS['accent'], 
-                               fg="white",
-                               relief="flat",
-                               cursor="hand2",
-                               padx=30,
-                               command=button_add_task)
+    add_task_button = tk.Button(input_frame,
+                                text="+ Add Task",
+                                font=("Segoe UI", 11, "bold"),
+                                bg=COLORS['accent'], 
+                                fg="white",
+                                relief="flat",
+                                cursor="hand2",
+                                padx=30,
+                                command=button_add_task)
     add_task_button.grid(row=0, column=2, sticky="ns", padx=15, pady=15)
 
     # Bind Enter key to add task
