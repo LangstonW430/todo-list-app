@@ -19,7 +19,7 @@ def run_gui():
         due_date = due_date_input_entry.get().strip()
         
         if not title:
-            return
+            title = "Untitled Task"
         
         new_task = Task()
         new_task.title = title
