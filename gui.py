@@ -192,9 +192,9 @@ def run_gui():
 
     control_frame.grid_columnconfigure(0, weight=1)
     control_frame.grid_columnconfigure(1, weight=1)
-    control_frame.grid_columnconfigure(2, weight=1)
 
-    sort_btn = tk.Button(control_frame, text="⇅ Sort by Date",
+    sort_btn = tk.Button(control_frame,
+                        text="⇅ Sort by Date",
                         font=("Segoe UI", 10),
                         bg=COLORS['bg_secondary'], 
                         fg=COLORS['text_primary'],
@@ -204,14 +204,15 @@ def run_gui():
                         command=sort_list_button)
     sort_btn.grid(row=0, column=0, padx=5, sticky="ew")
 
-    toggle_btn = tk.Button(control_frame, text="✓ Completed Tasks",
-                          font=("Segoe UI", 10),
-                          bg=COLORS['bg_secondary'], 
-                          fg=COLORS['text_primary'],
-                          relief="flat",
-                          cursor="hand2",
-                          padx=20, pady=10,
-                          command=toggle_list)
+    toggle_btn = tk.Button(control_frame,
+                        text="✓ Completed Tasks",
+                        font=("Segoe UI", 10),
+                        bg=COLORS['bg_secondary'], 
+                        fg=COLORS['text_primary'],
+                        relief="flat",
+                        cursor="hand2",
+                        padx=20, pady=10,
+                        command=toggle_list)
     toggle_btn.grid(row=0, column=1, padx=5, sticky="ew")
 
     # Main scrollable frame
