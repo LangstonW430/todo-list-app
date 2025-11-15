@@ -102,7 +102,8 @@ def run_gui():
             "done": COLORS['done']
         }.get(task.status, COLORS['not_started'])
         
-        status_button = tk.Button(task_frame, text=task.status.title(),
+        status_button = tk.Button(task_frame,
+                                  text=task.status.title(),
                                   font=("Segoe UI", 9, "bold"),
                                   bg=status_bg, 
                                   fg=COLORS['text_primary'],
@@ -115,13 +116,15 @@ def run_gui():
         status_button.grid(row=0, column=2, padx=5)
 
         # Delete button
-        delete_btn = tk.Button(task_frame, text="✕",
+        delete_btn = tk.Button(task_frame,
+                               text="✕",
                                font=("Segoe UI", 12, "bold"),
                                bg=COLORS['bg_secondary'], 
                                fg=COLORS['danger'],
                                relief="flat",
                                cursor="hand2",
-                               padx=10, pady=8,
+                               padx=10,
+                               pady=8,
                                command=delete_task)
         delete_btn.grid(row=0, column=3, padx=(0, 5))
 
@@ -169,6 +172,18 @@ def run_gui():
         task_list.save_to_file()
         done_list.save_to_file("done_tasks.json")
         window.destroy()
+    
+    def on_focus_in(event, placeholder=""):
+        entry = event.widget
+        if entry.get() == placeholder:
+            entry.delete(0, tk.END)
+            entry.config(fg="black")
+
+    def on_focus_out(event, placeholder=""):
+        entry = event.widget
+        if not entry.get():
+            entry.insert(0, placeholder)
+            entry.config(fg="grey")
 
     # Main window setup
     window = tk.Tk()
@@ -191,8 +206,10 @@ def run_gui():
     title_font = tkFont.Font(family="Segoe UI", size=20, weight="bold")
     title_label = tk.Label(header_frame,
                            text="📝 My To-Do List", 
-                           font=title_font, bg=COLORS['accent'], 
-                           fg="white", pady=25)
+                           font=title_font,
+                           bg=COLORS['accent'], 
+                           fg="white",
+                           pady=25)
     title_label.pack()
 
     # Control buttons frame
@@ -286,12 +303,15 @@ def run_gui():
                                     bg=COLORS['bg_secondary'],
                                     fg=COLORS['text_secondary'])
     due_date_input_label.pack(anchor="w")
+    
 
     due_date_input_entry = tk.Entry(due_date_input_frame,
                                     font=("Segoe UI", 11),
                                     relief="flat",
                                     bg=COLORS['bg_primary'])
     due_date_input_entry.pack(fill="x", ipady=8)
+    due_date_input_entry.bind("<FocusIn>", lambda e: on_focus_in(e, "YYYY-MM-DD"))
+    due_date_input_entry.bind("<FocusOut>", lambda e: on_focus_out(e, "YYYY-MM-DD"))
 
     # Add button
     add_task_button = tk.Button(input_frame,
