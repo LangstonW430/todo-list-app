@@ -90,7 +90,7 @@ def run_gui():
 
         # Due date
         due_date_label = tk.Label(task_frame, 
-                                  text=task.due_date if task.due_date else "No due date",
+                                  text=task.due_date.strftime("%m/%d/%Y") if task.due_date else "No due date",
                                   font=("Segoe UI", 10),
                                   bg=COLORS['bg_secondary'], 
                                   fg=COLORS['text_secondary'],
