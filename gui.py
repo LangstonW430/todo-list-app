@@ -3,7 +3,7 @@ import tkinter as tk
 import tkinter.font as tkFont
 from task import Task
 from contants import WINDOW_WIDTH, WINDOW_HEIGHT, COLORS
-from datetime import date
+from datetime import date, datetime
 
 def run_gui():
     task_list = TaskManager()
@@ -19,6 +19,10 @@ def run_gui():
         title = title_input_entry.get().strip()
         due_date = due_date_input_entry.get().strip()
         
+        if not parse_date(due_date):
+            print("Invalid date format. Please use MM/DD/YYYY.")
+            return
+
         if not title:
             title = "Untitled Task"
         
@@ -185,6 +189,12 @@ def run_gui():
         if not entry.get():
             entry.insert(0, placeholder)
             entry.config(fg="grey")
+
+    def parse_date(date_str):
+        try:
+            return datetime.strptime(date_str, "%m/%d/%Y")
+        except ValueError:
+            return None
 
     # Main window setup
     window = tk.Tk()
