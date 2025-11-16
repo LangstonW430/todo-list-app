@@ -3,6 +3,7 @@ import tkinter as tk
 import tkinter.font as tkFont
 from task import Task
 from contants import WINDOW_WIDTH, WINDOW_HEIGHT, COLORS
+from datetime import date
 
 def run_gui():
     task_list = TaskManager()
@@ -218,6 +219,7 @@ def run_gui():
 
     control_frame.grid_columnconfigure(0, weight=1, uniform="buttons")
     control_frame.grid_columnconfigure(1, weight=1, uniform="buttons")
+    control_frame.grid_columnconfigure(2, weight=1, uniform="buttons")
 
     sort_btn = tk.Button(control_frame,
                          text="⇅ Sort by Date",
@@ -242,6 +244,20 @@ def run_gui():
                            pady=10,
                            command=toggle_list)
     toggle_btn.grid(row=0, column=1, padx=5, sticky="ew")
+
+    time_and_date_button = tk.Button(control_frame,
+                                   text=date.today().strftime("%B %d, %Y"),
+                                   font=("Segoe UI", 10),
+                                   bg=COLORS['bg_secondary'], 
+                                   fg=COLORS['text_primary'],
+                                   relief="flat",
+                                   cursor="arrow",
+                                   padx=20,
+                                   pady=10,
+                                   state="disabled",
+                                   disabledforeground=COLORS['text_primary'])
+    
+    time_and_date_button.grid(row=0, column=2, padx=5, sticky="ew")
 
     # Main scrollable frame
     main_frame = tk.Frame(window, bg=COLORS['bg_primary'])
@@ -310,8 +326,8 @@ def run_gui():
                                     relief="flat",
                                     bg=COLORS['bg_primary'])
     due_date_input_entry.pack(fill="x", ipady=8)
-    due_date_input_entry.bind("<FocusIn>", lambda e: on_focus_in(e, "YYYY-MM-DD"))
-    due_date_input_entry.bind("<FocusOut>", lambda e: on_focus_out(e, "YYYY-MM-DD"))
+    due_date_input_entry.bind("<FocusIn>", lambda e: on_focus_in(e, "MM/DD/YYYY"))
+    due_date_input_entry.bind("<FocusOut>", lambda e: on_focus_out(e, "MM/DD/YYYY"))
 
     # Add button
     add_task_button = tk.Button(input_frame,
