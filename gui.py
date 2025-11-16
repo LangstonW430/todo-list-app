@@ -20,16 +20,13 @@ def run_gui():
         due_date = due_date_input_entry.get().strip()
         
         if not parse_date(due_date):
-            print("Invalid date format. Please use MM/DD/YYYY.")
             return
 
         if not title:
             title = "Untitled Task"
         
-        new_task = Task()
+        new_task = Task(title, parse_date(due_date))
         new_task.title = title
-        if due_date:
-            new_task.due_date = due_date
         
         task_list.add_task(new_task)
         title_input_entry.delete(0, 'end')

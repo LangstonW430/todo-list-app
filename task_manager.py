@@ -17,10 +17,6 @@ class TaskManager:
     def task_at(self, index=0):
         return self.tasks[index] if 0 <= index < len(self.tasks) else None
 
-    def list_task(self):
-        for task, index in enumerate(self.tasks):
-            print(f"{index}. {task.title} - Due: {task.due_date}")
-
     def sort_list(self, reverse=False):
         self.tasks.sort(key=lambda task: task.title.lower(), reverse=reverse)
 
