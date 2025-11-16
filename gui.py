@@ -19,7 +19,9 @@ def run_gui():
         title = title_input_entry.get().strip()
         due_date = due_date_input_entry.get().strip()
         
-        if not parse_date(due_date):
+        if not due_date:
+            due_date = date.today().strftime("%m/%d/%Y")
+        elif not parse_date(due_date):
             return
 
         if not title:
