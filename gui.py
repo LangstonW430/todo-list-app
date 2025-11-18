@@ -2,7 +2,7 @@ from task_manager import TaskManager
 import tkinter as tk
 import tkinter.font as tkFont
 from task import Task
-from contants import WINDOW_WIDTH, WINDOW_HEIGHT, COLORS
+from constants import WINDOW_WIDTH, WINDOW_HEIGHT, COLORS
 from datetime import date, datetime
 
 def run_gui():
@@ -76,6 +76,7 @@ def run_gui():
         task_frame.grid_columnconfigure(1, weight=0)
         task_frame.grid_columnconfigure(2, weight=0)
         task_frame.grid_columnconfigure(3, weight=0)
+        task_frame.grid_columnconfigure(4, weight=0)
 
         # Title
         title_label = tk.Label(task_frame,
@@ -99,6 +100,32 @@ def run_gui():
                                   pady=12)
         due_date_label.grid(row=0, column=1)
 
+        # Days remaining
+        remaining_days = task.calculate_remaining_time().total_seconds() // 86400
+
+        if remaining_days < 0:
+            remaining = "Overdue"
+        elif remaining_days == 0:
+            remaining = "Due Today"
+        elif remaining_days < 7:
+            remaining = f"{int(remaining_days)} days" if remaining_days > 1 else "1 day"
+        elif remaining_days < 30:
+            weeks = remaining_days // 7
+            remaining = f"{int(weeks)} weeks" if weeks > 1 else "1 week"
+        else:
+            remaining = ">1 month"
+        
+        
+        remaining_label = tk.Label(task_frame,
+                                   text=remaining,
+                                   width=9,
+                                   font=("Segoe UI", 10),
+                                   bg=COLORS['bg_secondary'],
+                                   fg=COLORS['text_secondary'])
+
+        remaining_label.grid(row=0, column=2, padx=5)
+
+
         # Status button
         status_bg = {
             "not started": COLORS['not_started'],
@@ -117,7 +144,7 @@ def run_gui():
                                   pady=8,
                                   width=12,
                                   command=cycle_status)
-        status_button.grid(row=0, column=2, padx=5)
+        status_button.grid(row=0, column=3, padx=5)
 
         # Delete button
         delete_btn = tk.Button(task_frame,
@@ -130,7 +157,7 @@ def run_gui():
                                padx=10,
                                pady=8,
                                command=delete_task)
-        delete_btn.grid(row=0, column=3, padx=(0, 5))
+        delete_btn.grid(row=0, column=4, padx=(0, 5))
 
     def resize_canvas(event):
         """Adjust canvas width on window resize"""
