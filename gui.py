@@ -19,9 +19,14 @@ def run_gui():
         title = title_input_entry.get().strip()
         due_date = due_date_input_entry.get().strip()
         
+        print(due_date + f"/{(datetime.now().year)}")
+
         if not due_date or due_date == "MM/DD/YYYY":
             due_date = date.today().strftime("%m/%d/%Y")
-        elif not parse_date(due_date) or (parse_date(due_date) < date.today()):
+        elif parse_date(due_date + f"/{(datetime.now().year)}"):
+            due_date += f"/{datetime.now().year}"
+        
+        if not parse_date(due_date) or (parse_date(due_date) < date.today()):
             return
 
         if not title:
